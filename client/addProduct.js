@@ -9,7 +9,7 @@ Template.addProduct.events({
     }
     var info = {
       name: $("#new-name-input").val(),
-      minPrice: parseFloat($("#new-price-input").val()),
+      initialPrice: parseFloat($("#new-price-input").val()),
       fundNeeded: parseFloat($("#new-funding-input").val()),
       description: $("#new-desc-input").val(),
       fundRaised: 0,
