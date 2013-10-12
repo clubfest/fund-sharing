@@ -1,4 +1,5 @@
 <template name="products">
+  <h1>Products for sale</h1>
   <ul>
     {{#each products}}
       <li>
@@ -8,8 +9,6 @@
           </a>
         </div>
         <div>Price: {{minPrice}}</div>
-        <div>Copies sold: {{numCustomers}}</div>
-        <div>Funding goal: {{fundingNeeded}}</div>
       </li>
     {{/each}}
   </ul>

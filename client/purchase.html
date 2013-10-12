@@ -1,6 +1,17 @@
 <template name="purchase">
-  hi
+
+  <h1>Details</h1>
   {{#with product}}
     <h2>{{name}}</h2>
+    {{{description}}}
+    <div>Copies sold: {{numCustomers}}</div>
+    <div>Funding goal: {{fundingNeeded}}</div>
+    <h2>Purchasing</h2>
+    
+    <div>Price: {{minPrice}}</div>
+    <div>
+      <input id="support-input" placeholder="Additional $upport" />      
+    </div>
+    <button id="purchase-submit">Submit purchase</button>
   {{/with}}
 </template>
