@@ -15,5 +15,17 @@ Meteor.methods({
         numCopiesSold: 1
       }
     });
+  },
+  addProduct: function(options){
+    check(options.minPrice, Number);
+    check(options.fundNeeded, Number);
+    check(options.daysNeeded, Number);
+    if (options.name == 0){
+      throw new Meteor.Error(413, "Please provide a name")
+    }
+    if (Products.findOne({name: options.name})){
+      throw new Meteor.Error(413, "Please pick another name, as this name as been taken.");
+    }
+    Products.insert(options)
   }
 })

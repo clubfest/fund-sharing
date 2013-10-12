@@ -1,13 +1,42 @@
 <template name='addProduct'>
-<h1>Add new product</h1>
-<form>
-  <input type='text' placeholder='Product name' />
-  <br/>
-  <input type='text' placeholder='Price' />
-  <br/>
-  <input type='text' placeholder='Funding needed' />
-  <br/>
-  <input type='textarea' placeholder='Product description' />
-  <br/>
+<h2>Add new product</h2>
+<form class="form-horizontal">
+  <div class="control-group">
+    <label for="new-name-input" class="control-label">Product name</label>
+    <div class="controls">
+      <input id="new-name-input" type='text' placeholder='Product name' />
+    </div>
+  </div>
+  <div class='control-group'>
+    <label for="new-desc-input" class="control-label">Product description</label>
+    <div class="controls">
+      <textarea id="new-desc-input" placeholder='Product description'></textarea>
+    </div>
+  </div>
+    
+  <div class='control-group'>
+    <label for="new-funding-input" class="control-label">Funding needed</label>
+    <div class="controls">
+      <input id="new-funding-input" type='text' value='0' />
+    </div>
+  </div>
+
+  <div class='control-group'>
+    <label for='days-needed-input' class='control-label'>Days needed</label>
+    <div class='controls'>
+      <input id="days-needed-input" type='text' value="20" />      
+    </div>
+  </div>
+  <div class='control-group'>
+    <label for='new-price-input' class='control-label'>Price</label>
+    <div class='controls'>
+      <input id="new-price-input" type='text' value='0' />
+    </div>
+  </div>
+  <div class='form-actions'>
+    <button id="new-product-submit" class='btn btn-primary'>
+      Submit new product
+    </button>
+  </div>
 </form>
 </template>
