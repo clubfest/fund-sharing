@@ -5,6 +5,15 @@ Template.purchase.product = function(){
 
 Template.purchase.events({
   "click #purchase-submit": function(){
+    var support = parseFloat($("#support-input").val());
+    if (!support || support < 0) {
+      alert("support must be positive.");
+      return ;
+    }
+    Meteor.call("savePurchase", {
+      name: Session.get("name"),
+      support: support,
+    })
     Meteor.Router.to('/products');
   }
 })
