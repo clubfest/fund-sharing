@@ -3,12 +3,14 @@
 </head>
 
 <body>
-  {{renderPage}}
+  <div id='body-wrapper'>
+    {{> navigation}}
+    {{renderPage}}
+  </div>
 </body>
 
+
 <template name="about">
-  <a href="/products">Products</a>
-  <a href="/addProduct">Add new product</a>
   <h2>About</h2>
   <p>Products and users</p>
   <p>Each product has a minimum price.</p>

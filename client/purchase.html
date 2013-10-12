@@ -1,20 +1,35 @@
 <template name="purchase">
 
-  <h1>Details</h1>
   {{#with product}}
     <h2>{{name}}</h2>
-    {{{description}}}
-    <div>Copies sold: {{numCopiesSold}}</div>
-    <div>Funding progress: {{fundRaised}} /{{fundNeeded}}</div>
-    <h2>Purchasing</h2>
+    <div id='desc'>
+      {{{description}}}
+    </div>
+    <div>Days needed</div>
+    <div>{{daysNeeded}}</div>
+    <!-- <div>Copies sold: {{numCopiesSold}}</div> -->
+    <h3>Funding progress</h3>
+    <div>{{fundRaised}} / {{fundNeeded}}</div>
+    <div id='fund-progressbar'></div>
+    <h3>Purchasing</h3>
     
-    <div>Price: {{minPrice}}</div>
-    <div>
-      Additional $upport:
+    <div class='control-group'>
+      <label class='control-label'>Price</label>
+      <div class='controls'>${{minPrice}}</div>
     </div>
-    <div>
-      <input id="support-input" value="0" />      
+    <div class='control-group'>
+      <label for='support-input' class='control-label'>
+        Additional Support in $        
+      </label>
+      <div class='controls'>
+        <input id="support-input" type='text' value="0" />      
+      </div>
+      <div class='form-actions'>
+        <button id="purchase-submit" class='btn btn-primary'>
+          Submit purchase
+        </button>
+      </div>
     </div>
-    <button id="purchase-submit">Submit purchase</button>
+      
   {{/with}}
 </template>

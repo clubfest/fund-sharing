@@ -9,3 +9,7 @@ insecure
 preserve-inputs
 router
 bootstrap
+accounts-base
+accounts-ui
+accounts-password
+jquery-ui
