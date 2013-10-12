@@ -1,6 +1,7 @@
 
 Template.purchase.product = function(){
-  return Products.findOne({name: Session.get("name")});
+  var info = Products.findOne({name: Session.get("name")});
+  return info
 }
 
 Template.purchase.events({
@@ -14,6 +15,5 @@ Template.purchase.events({
       name: Session.get("name"),
       support: support,
     })
-    Meteor.Router.to('/products');
   }
 })

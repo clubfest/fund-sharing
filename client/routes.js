@@ -5,6 +5,7 @@ Meteor.Router.add({
     Session.set("name", name);
     return "purchase";
   },
+  '/addProduct': 'addProduct',
 
   '*': 'not_found'
 });

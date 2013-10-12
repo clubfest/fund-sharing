@@ -10,7 +10,10 @@ Meteor.methods({
     });
     var minPrice = Products.findOne({name: options.name})["minPrice"]
     Products.update({name: options.name}, {
-      $inc: {fundRaised: options.support + minPrice}
+      $inc: {
+        fundRaised: options.support + minPrice,
+        numCopiesSold: 1
+      }
     });
   }
 })
