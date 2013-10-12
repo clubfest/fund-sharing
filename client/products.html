@@ -1,11 +1,16 @@
 <template name="products">
   <ul>
     {{#each products}}
-      <div>{{title}}</div>
-      <div>{{price}}</div>
-      <div>{{numCustomers}}</div>
-      <div>{{numCustomersNeeded}}</div>
+      <li>
+        <div>
+          <a href="/product/{{title}}">
+            {{title}}
+          </a>
+        </div>
+        <div>{{minPrice}}</div>
+        <div>{{numCustomers}}</div>
+        <div>{{fundingNeeded}}</div>
+      </li>
     {{/each}}
   </ul>
-    
 </template>
