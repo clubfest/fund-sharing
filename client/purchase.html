@@ -11,12 +11,17 @@
     <h3>Funding progress</h3>
     <div>{{fundRaised}} / {{fundNeeded}}</div>
     <div id='fund-progressbar'></div>
-    <h3>Purchasing</h3>
-    
+    <h3>Ordering</h3>
+    <div class='control-group'>
+      <label class='control-label'>Days needed</label>
+      <div class='controls'>{{daysNeeded}}</div>
+    </div>
     <div class='control-group'>
       <label class='control-label'>Price</label>
       <div class='controls'>${{minPrice}}</div>
     </div>
+
+
     <div class='control-group'>
       <label for='support-input' class='control-label'>
         Additional Support in $        
@@ -26,7 +31,7 @@
       </div>
       <div class='form-actions'>
         <button id="purchase-submit" class='btn btn-primary'>
-          Submit purchase
+          Submit order
         </button>
       </div>
     </div>

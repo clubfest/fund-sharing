@@ -13,3 +13,6 @@ body {
 #support-input {
   width: 70px;
 }
+#fund-progressbar {
+  max-width: 200px;
+}

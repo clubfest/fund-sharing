@@ -16,7 +16,7 @@ Template.purchase.rendered = function(){
 Template.purchase.events({
   "click #purchase-submit": function(){
     var support = parseFloat($("#support-input").val());
-    if (!support || support < 0) {
+    if (support < 0) {
       alert("support must be positive.");
       return ;
     }

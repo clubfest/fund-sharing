@@ -3,6 +3,10 @@ Purchases = new Meteor.Collection("purchases");
 
 Meteor.methods({
   savePurchase: function(options){
+    var userId = Meteor.userId();
+    if (!userId){
+      throw new Meteor.Error(413, "Please sign in first");
+    }
     check(options.support, Number);
     Purchases.insert({
       name: options.name,
@@ -15,8 +19,17 @@ Meteor.methods({
         numCopiesSold: 1
       }
     });
+    Meteor.users.update(userId, {
+      $inc: {
+        money: -(options.support + minPrice)
+      }
+    })
   },
   addProduct: function(options){
+    var userId = Meteor.userId();
+    if (!userId){
+      throw new Meteor.Error(413, "Please sign in first");
+    }
     check(options.minPrice, Number);
     check(options.fundNeeded, Number);
     check(options.daysNeeded, Number);
