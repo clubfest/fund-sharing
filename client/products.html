@@ -1,15 +1,24 @@
 <template name="products">
   <h1>Products for sale</h1>
-  <ul>
+  <table>
+    <thead>
+      <td>Name</td>
+      <td>Initial Price ($)</td>
+    </thead>
     {{#each products}}
-      <li>
-        <div>
+      <tr>
+        <td style="padding: 5px;">
           <a href="/purchase/{{name}}">
             {{name}}
           </a>
-        </div>
-        <div>Price: {{initialPrice}}</div>
-      </li>
+        </td>
+        <td align='right'>
+          {{initialPrice}}
+        </td>
+      </tr>
     {{/each}}
+  </table>
+  <ul style="list-style: none;">
+    
   </ul>
 </template>

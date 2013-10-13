@@ -9,6 +9,10 @@ body {
   padding: 20px;
   font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
   min-height: 600px;
+  line-height: 25px;
+}
+#content-list li{
+  padding: 10px;
 }
 #support-input {
   width: 70px;

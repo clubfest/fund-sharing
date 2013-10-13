@@ -6,6 +6,6 @@ Meteor.Router.add({
     return "purchase";
   },
   '/addProduct': 'addProduct',
-
+  '/profile': 'profile',
   '*': 'not_found'
 });
