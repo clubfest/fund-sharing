@@ -27,7 +27,6 @@ Meteor.methods({
     if (newPrice < product.price){
       product.price = newPrice
     }
-    console.log(newPrice);
     var updateOptions = {
       fundRaised: product.fundRaised + paid,
       numCopiesSold: product.numCopiesSold + 1,
