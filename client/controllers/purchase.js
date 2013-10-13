@@ -35,6 +35,7 @@ Template.purchase.rendered = function(){
 Template.purchase.events({
   "click #purchase-submit": function(){
     var support = parseFloat($("#support-input").val());
+    var email = prompt("Email of the product's receiver:");
     if (support < 0) {
       alert("support must be positive.");
       return ;
@@ -42,6 +43,7 @@ Template.purchase.events({
     Meteor.call("savePurchase", {
       name: Session.get("name"),
       support: support,
+      email: email
     });
   }
 })

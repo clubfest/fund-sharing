@@ -5,7 +5,8 @@
   <thead>
     <td>Name</td>
     <td>Status</td>
-    <td>Refund</td>
+    <td>Refunded</td>
+    <td>Donated</td>
   </thead>
   {{#each products}}
     <tr>
@@ -17,11 +18,18 @@
       <td>
         <i class='icon-lightbulb'></i>
         <i class='icon-wrench'></i>
-        <i class='icon-heart-empty'></i>
+        <i class='icon-truck'></i>
         <i class='icon-gift'></i>
       </td>
       <td align='right'>
-        <button class="refund" data-productId='{{_id}}'>$0</button>
+        <a href='#'>
+          $0
+        </a>
+      </td>
+      <td align="right">
+        <a href="#">
+          $0    
+        </a>
       </td>
     </tr>
   {{/each}}
