@@ -1,19 +1,25 @@
 <template name="products">
   <h1>Products for sale</h1>
-  <table>
+  <table id='product-table'>
     <thead>
       <td>Name</td>
-      <td>Initial Price ($)</td>
+      <td>Status</td>
+      <td>Price</td>
     </thead>
     {{#each products}}
       <tr>
-        <td style="padding: 5px;">
+        <td>
           <a href="/purchase/{{name}}">
             {{name}}
           </a>
         </td>
+        <td>
+          <i class='icon-beer'></i>
+          <i class='icon-heart'></i>
+          <i class='icon-flag-checkered'></i>
+        </td>
         <td align='right'>
-          {{initialPrice}}
+          ${{initialPrice}}
         </td>
       </tr>
     {{/each}}

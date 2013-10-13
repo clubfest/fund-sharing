@@ -1,8 +1,30 @@
 
 <template name='profile'>
-<h2>Outstanding Order</h2>
-
-<h2>Available products</h2>
-
-<h2>Your creation</h2>
+<h2>Order</h2>
+<table id='product-table'>
+  <thead>
+    <td>Name</td>
+    <td>Status</td>
+    <td>Refund</td>
+  </thead>
+  {{#each products}}
+    <tr>
+      <td>
+        <a href="/purchase/{{name}}">
+          {{name}}
+        </a>
+      </td>
+      <td>
+        <i class='icon-lightbulb'></i>
+        <i class='icon-wrench'></i>
+        <i class='icon-heart-empty'></i>
+        <i class='icon-gift'></i>
+      </td>
+      <td align='right'>
+        <button class="refund" data-productId='{{_id}}'>$0</button>
+      </td>
+    </tr>
+  {{/each}}
+</table>
+<h2>Products</h2>
 </template>

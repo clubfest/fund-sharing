@@ -1,33 +1,40 @@
 <template name="purchase">
 
   {{#with product}}
-    <h2>{{name}}</h2>
-    <div id='desc'>
+    <h2 data-category='name' class="editable" data-type="text" data-placeholder="Enter text" data-emptytext="Enter the product name">
+      {{name}}
+    </h2>
+    <div data-category='description' class="editable" data-type="wysihtml5" data-placeholder="Enter text" data-emptytext="Enter the product description here" data-rows="4">
       {{{description}}}
     </div>
-    <div>Days needed</div>
-    <div>{{daysNeeded}}</div>
-    <!-- <div>Copies sold: {{numCopiesSold}}</div> -->
+
+
     <h3>Funding progress</h3>
-    <div>{{fundRaised}} / {{fundNeeded}}</div>
     <div id='fund-progressbar'></div>
+    <div>${{fundRaised}} / $<span data-category='fundNeeded' class="editable control" data-type="text" data-placeholder="Enter text" data-emptytext="Enter Initial Price in $">{{fundNeeded}}</span></div>
+
+
     <h3>Ordering</h3>
     <div class='control-group'>
-      <label class='control-label'>Days needed</label>
-      <div class='controls'>{{daysNeeded}}</div>
+      <label class='control-label'>Time needed</label>
+      <div class='controls'>
+        <span data-category='daysNeeded' class="editable" data-type="text" data-placeholder="Enter text" data-emptytext="Enter Initial Price in $">{{daysNeeded}}</span> Days
+      </div>
     </div>
     <div class='control-group'>
       <label class='control-label'>Price</label>
-      <div class='controls'>${{initialPrice}}</div>
+      <div class='controls'>
+        $<span data-category='initialPrice' class="editable" data-type="text" data-placeholder="Enter text" data-emptytext="Enter Initial Price in $">{{initialPrice}}</span>
+      </div>
     </div>
 
 
     <div class='control-group'>
       <label for='support-input' class='control-label'>
-        Additional Support in $        
+        Additional Support        
       </label>
       <div class='controls'>
-        <input id="support-input" type='text' value="0" />      
+        $ <input id="support-input" type='text' value="0" />      
       </div>
       <div class='form-actions'>
         <button id="purchase-submit" class='btn btn-primary'>

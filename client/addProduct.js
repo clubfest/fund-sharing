@@ -11,7 +11,7 @@ Template.addProduct.events({
       name: $("#new-name-input").val(),
       initialPrice: parseFloat($("#new-price-input").val()),
       fundNeeded: parseFloat($("#new-funding-input").val()),
-      description: $("#new-desc-input").val(),
+      // description: $("#new-desc-input").val(),
       fundRaised: 0,
       numCopiesSold: 0,
       daysNeeded: parseFloat($('#days-needed-input').val()),
