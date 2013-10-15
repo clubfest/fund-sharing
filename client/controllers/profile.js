@@ -92,8 +92,13 @@ Template.profile.events({
       if (err) alert(err.reason);
     });
   },
-  'click .notify-icon': function(){
-    alert('not implemened');
+  'click .notify-icon': function(evt){
+    // TODO: send notifications to every user
+    var content = prompt("Email content:");
+    if (!content) return ;
+    Meteor.call('sendToClients', evt.currentTarget.dataset.productId, "News from funding.a.meteor.com", content, function(err){
+      if (err) alert(err.reason);
+    });
   },
   'click .release-button': function(evt){
     var productId = evt.currentTarget.dataset.productId;
@@ -103,6 +108,14 @@ Template.profile.events({
       var status = 'giving';
     }
     Meteor.call('updateProduct', productId, {status: status});
+  },
+  'click .comment-icon': function(evt){
+    var content = prompt("Email content:");
+    if (!content) return ;
+    var productId = evt.currentTarget.dataset.productId;
+    Meteor.call('sendToClients', productId, "Comment on your product at funding.a.meteor.com", content, function(err){
+      if (err) alert(err.reason);
+    });
   }
 })
 

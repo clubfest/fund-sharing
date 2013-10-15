@@ -6,6 +6,7 @@
     <td>Name</td>
     <td class='align-right'>Status</td>
     <td>Release Date</td>
+    <td>Comment</td>
     <td class='align-right'>Refund</td>
     <td></td>
     <td class='align-right'>Donate</td>
@@ -24,6 +25,7 @@
         {{#isGiving status}}<i class='icon-gift'></i>{{/isGiving}}
       </td>
       <td>{{dateAbbrev releaseDate}}</td>
+      <td><a class='comment-icon' data-product-id={{productId}}><i class='icon-envelope'></i></a></td>
       <td class='align-right'>
         ${{availableRefund}} / ${{possibleRefund}}
       </td>
@@ -81,7 +83,7 @@
           ${{donations}}
         </td>
         <td>{{dateAbbrev releaseDate}}</td>
-        <td><a class='notify-icon'><i class='icon-envelope'></i></a></td>
+        <td><a class='notify-icon' data-product-id={{_id}}><i class='icon-envelope'></i></a></td>
       </tr>
     {{/each}}
   </table>

@@ -19,7 +19,7 @@ Meteor.methods({
       text: text
     });
   },
-  sendToMailingList: function (from, to, cc, replyTo, subject, text) {
+  sendToMailingList: function (from, to, bcc, replyTo, subject, text) {
     check([from, subject, text], [String]);
 
     // Let other method calls from the same client start running,
@@ -29,10 +29,27 @@ Meteor.methods({
     Email.send({
       from: from,
       to: to,
-      cc: cc,
+      bcc: cc,
       replyTo: replyTo,
       subject: subject,
       text: text
+    });
+  },
+  'sendToClients': function(productId, subject, content){
+    var product = Products.findOne(productId);
+    var creatorEmail = Meteor.user().emails[0].address;
+    var mailingList = [];
+    for (var i=0; i<product.orders.length; i++){
+      mailingList.push(product.orders[i].email);
+    }
+    this.unblock();
+    Email.send({
+      from: 'FundSharing@funding.a.meteor.com',
+      to: creatorEmail,
+      bcc: mailingList,
+      replyTo: creatorEmail,
+      subject: subject,
+      text: content,
     });
   }
 });
