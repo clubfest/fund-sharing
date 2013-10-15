@@ -20,7 +20,7 @@ Meteor.methods({
       releaseDate = new Date();
       releaseDate += releaseDate.setDate(releaseDate.getDate()+product.daysNeeded);
       // TODO: send notifications to every client and user
-      var creatorEmail = Meteor.users.findOne(product.creatorId).emails[0].address;
+      var creatorEmail = Meteor.users.findOne(product.creatorId).services.facebook.email;
       for (var i=0; i<product.orders.length; i++){
         mailingList.push(product.orders[i].email);
       }
@@ -32,7 +32,7 @@ Meteor.methods({
         product.donations >= product.fundNeeded){
       status = "giving";
       // TODO: send notifications to every user
-      var creatorEmail = Meteor.users.findOne(product.creatorId).emails[0].address;
+      var creatorEmail = Meteor.users.findOne(product.creatorId).services.facebook.email;
       for (var i=0; i<product.orders.length; i++){
         mailingList.push(product.orders[i].email);
       }

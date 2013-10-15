@@ -37,14 +37,14 @@ Meteor.methods({
   },
   'sendToClients': function(productId, subject, content){
     var product = Products.findOne(productId);
-    var creatorEmail = Meteor.user().emails[0].address;
+    var creatorEmail = Meteor.user().services.facebook.email;
     var mailingList = [];
     for (var i=0; i<product.orders.length; i++){
       mailingList.push(product.orders[i].email);
     }
     this.unblock();
     Email.send({
-      from: 'FundSharing@funding.a.meteor.com',
+      from: nameDotted(product.name)+'@funding.a.meteor.com',
       to: creatorEmail,
       bcc: mailingList,
       replyTo: creatorEmail,

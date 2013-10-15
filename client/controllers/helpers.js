@@ -6,7 +6,7 @@ Handlebars.registerHelper("isAdmin", function(){
 });
 
 Handlebars.registerHelper("email", function(){
-  return Meteor.user().emails[0].address;
+  return Meteor.user().services.facebook.email;
 })
 
 ///// status
@@ -38,11 +38,5 @@ Handlebars.registerHelper('product', function(){
 
 //// Date
 Handlebars.registerHelper('dateAbbrev', function(date){
-  if (!date) return 'T.B.A.';
-  date = date.split(" ");
-  var ret = date[1] + ' ' + date[2] 
-  if ((new Date()).getFullYear() !== parseInt(date[3])){
-    ret += ', ' + date[3];
-  }
-  return ret;
+  return dateAbbrev(date);
 })
