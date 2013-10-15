@@ -11,11 +11,7 @@ Template.addProduct.events({
       name: $("#new-name-input").val(),
       initialPrice: parseFloat($("#new-price-input").val()),
       fundNeeded: parseFloat($("#new-funding-input").val()),
-      status: "conceiving", // or building or shipping or giving
-      fundRaised: 0,
-      numCopiesSold: 0,
       daysNeeded: parseFloat($('#days-needed-input').val()),
-      creatorId: creatorId,
     }
     Meteor.call("addProduct", info, function(err){
       if (err) {

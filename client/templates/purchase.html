@@ -8,9 +8,8 @@
       {{{description}}}
     </div>
 
-
     <h3>Funding progress</h3>
-    <div id='fund-progressbar'></div>
+    <div class='progressbar'></div>
     <div>${{fundRaised}} / $<span data-category='fundNeeded' class="editable control" data-type="text" data-placeholder="Enter text" data-emptytext="Enter Initial Price in $">{{fundNeeded}}</span></div>
 
 
@@ -28,19 +27,27 @@
       </div>
     </div>
 
-
     <div class='control-group'>
-      <label for='support-input' class='control-label'>
-        Additional Support        
+      <label for='support-input' class='control-label'>       
+        Additional Support (this is refundable and not a donation)       
       </label>
       <div class='controls'>
         $ <input id="support-input" type='text' value="0" />      
       </div>
-      <div class='form-actions'>
-        <button id="purchase-submit" class='btn btn-primary'>
-          Submit order
-        </button>
+    </div>
+    <div class='control-group'>
+      <label for='email-input' class='control-label'>
+        Email of receiver
+      </label>
+      <div class='controls'>
+        <input id="email-input" type='text' value="{{email}}" />      
       </div>
+    </div>
+
+    <div class='form-actions'>
+      <button id="purchase-submit" class='btn btn-primary'>
+        Submit order
+      </button>
     </div>
       
   {{/with}}

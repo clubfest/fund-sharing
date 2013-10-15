@@ -1,0 +1,63 @@
+
+<template name='donate'>
+  {{#with product}}
+    <h2>{{name}}</h2>
+    <div data-category='description' class="editable" data-type="wysihtml5" data-placeholder="Enter text" data-emptytext="Enter the product description here" data-rows="4">
+      {{{description}}}
+    </div>
+
+   <!--  <div class='control-group'>
+      <label for='donation-input' class='control-label'>
+        Amount to donate
+      </label>
+      <div class='controls'>
+        $ <input id="donation-input" type='text' value="0" />      
+      </div>
+    </div>
+
+    <button id="donation-submit" class='btn btn-primary'>
+      Donate
+    </button> -->
+
+    <!-- distinguish between ordering and purchasing -->
+    <h3>Ordering</h3>
+    <div class='control-group'>
+      <label class='control-label'>Date of Release</label>
+      <div class='controls'>
+        <span data-category='daysNeeded' class="editable" data-type="text" data-placeholder="Enter text" data-emptytext="Enter Initial Price in $">{{daysNeeded}}</span> Days
+      </div>
+    </div>
+    <div class='control-group'>
+      <label class='control-label'>Price</label>
+      <div class='controls'>
+        $<span data-category='initialPrice' class="editable" data-type="text" data-placeholder="Enter text" data-emptytext="Enter Initial Price in $">{{price}}</span>
+      </div>
+    </div>
+    <div class='control-group'>
+      <label for='email-input' class='control-label'>
+        Email of receiver
+      </label>
+      <div class='controls'>
+        <input id="email-input" type='text' value="{{email}}" />      
+      </div>
+    </div>
+    <div class='control-group'>
+      <label for='comment-input' class='control-label'>
+        Comment or request
+      </label>
+      <div class='controls'>
+        <textarea id="comment-input"></textarea>
+      </div>
+    </div>
+    <div class='form-actions'>
+      <button id="purchase-submit" class='btn btn-primary'>
+        Submit order
+      </button>
+    </div>
+
+    <h3>Donation progress</h3>
+    <p style='color: green'>Fund raising has been completed. If you want to donate, go to <a href='/profile'>your profile</a> after ordering.</p>
+    <div class='progressbar'></div>
+    <div>${{donations}} / $<span data-category='fundNeeded' class="editable control" data-type="text" data-placeholder="Enter text" data-emptytext="Enter Initial Price in $">{{fundNeeded}}</span></div>
+  {{/with}}
+</template>

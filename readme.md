@@ -8,6 +8,9 @@ Make it into a plug-in
 * store relevant product info in user.fundSharing to avoid sorting
 * refactor conceiving, building, shipping and gifting
 
+* How to hook user creation?
+* TODO: use mailgun
+
 ## Another idea
 A new file system where each file resembles a webpage. The webpage needs to have a built-in editor for adding text, drawings and audio recordings, as well as embedding other contents, and most important of all, splitting one document into a child. It should provide easy linking from a child to a unique parent via an awesome interface that displays a bunch of trees.
 

@@ -1,10 +1,11 @@
 <template name="products">
   <h1>Products for sale</h1>
-  <table id='product-table'>
+  <table class='product-table'>
     <thead>
       <td>Name</td>
       <td>Status</td>
-      <td>Price</td>
+      <td>Release Date</td>
+      <td class='align-right'>Price</td>
     </thead>
     {{#each products}}
       <tr>
@@ -13,18 +14,20 @@
             {{name}}
           </a>
         </td>
-        <td>
-          <i class='icon-beer'></i>
-          <i class='icon-heart'></i>
-          <i class='icon-flag-checkered'></i>
+        
+        <td class='align-right'>
+          {{#isConceiving status}}<i class='icon-lightbulb'></i>{{/isConceiving}}
+          {{#isBuilding status}}<i class='icon-wrench'></i>{{/isBuilding}}
+          {{#isShipping status}}<i class='icon-truck'></i>{{/isShipping}}
+          {{#isGiving status}}<i class='icon-gift'></i>{{/isGiving}}
         </td>
-        <td align='right'>
-          ${{initialPrice}}
+        <td>
+          {{dateAbbrev releaseDate}}
+        </td>
+        <td class='align-right'>
+          ${{price}}
         </td>
       </tr>
     {{/each}}
   </table>
-  <ul style="list-style: none;">
-    
-  </ul>
 </template>

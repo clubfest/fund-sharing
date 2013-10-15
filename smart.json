@@ -3,6 +3,7 @@
     "router": {},
     "jquery-ui": {},
     "font-awesome": {},
-    "x-editable-bootstrap": {}
+    "x-editable-bootstrap": {},
+    "bootboxjs": {}
   }
 }

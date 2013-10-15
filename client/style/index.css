@@ -3,11 +3,11 @@ body {
 }
 #body-wrapper {
   background-color: white;
-  max-width: 650px;
+  max-width: 600px;
   width: 95%;
   margin: 0 auto;
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
   min-height: 600px;
 }
 
@@ -23,10 +23,18 @@ body {
 #support-input {
   width: 70px;
 }
-#fund-progressbar {
+.progressbar {
   max-width: 200px;
 }
 
-#product-table td {
+.product-table td {
   padding-right: 20px;
+}
+
+.align-right {
+  text-align: right;
+}
+
+a {
+  cursor: pointer;
 }
