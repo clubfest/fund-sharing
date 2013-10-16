@@ -1,10 +1,4 @@
 
-
-
-// Template.purchase.isConceiving = function(){
-//   return Session.get('status') == 'conceiving';
-// }
-
 Template.purchase.rendered = function(){
   $('.progressbar').progressbar({
     value: Session.get('raised'),
@@ -16,15 +10,11 @@ Template.purchase.rendered = function(){
     $.fn.editable.defaults.mode = 'inline';
     $('.editable:not(.editable-click)').editable('destroy').editable({
       success: function(response, newValue) {
-        var options = {};
-        options[this.dataset.category] = newValue;
-        Meteor.call("updateProduct", Session.get("productId"), options, function(err){
-          if (err) alert(err.reason);
-        });
-    }});
+        updateProduct(this.dataset.category, newValue);
+      }
+    });
   }
 }
-    
 
 Template.purchase.events({
   "click #purchase-submit": function(){
@@ -35,20 +25,63 @@ Template.purchase.events({
       alert("support must be positive.");
       return ;
     }
-    var email = $('#email-input').val();
-    var comment = prompt("Comment or Request")
-    if (comment===null) return;
-    Meteor.call("savePurchase", {
-      name: Session.get("name"),
-      support: support,
-      email: email,
-      comment: comment
-    }, function(err){
+    // var email = $('#email-input').val();
+    var user = Meteor.user();
+    if (!user){
+      alert("Please sign in first");
+      return ;
+    }
+    Meteor.call("savePledge", Session.get("name"), support, user.services.facebook.email, function(err){
       if (err) {
         alert(err.reason);
       } else {
         Meteor.Router.to('/profile');
       }
     });      
+  },
+  'click .comment-icon': function(evt){
+    var content = prompt("Email content:");
+    if (!content) return ;
+    var productId = evt.currentTarget.dataset.productId;
+    Meteor.call('sendToClients', productId, "Comment on your product at funding.a.meteor.com", content, function(err){
+      if (err) alert(err.reason);
+    });
   }
 });
+
+function updateProduct(category, newValue){
+  var productId = Session.get('productId');
+  switch (category){
+    case "initialPrice":
+      newValue = parseFloat(newValue);
+      Meteor.call("updateInitialPrice", productId, newValue, function(err){
+        if (err) alert(err.reason);
+      });
+      break;
+    case "daysNeeded":
+      newValue = parseFloat(newValue);
+      Meteor.call("updateDaysNeeded", productId, newValue, function(err){
+        if (err) alert(err.reason);
+      });
+      break;
+    case "fundNeeded":
+      newValue = parseFloat(newValue);
+      Meteor.call("updateFundNeeded", productId, newValue, function(err){
+        if (err) alert(err.reason);
+      });
+      break;
+    case "name":
+      Meteor.call("updateName", productId, newValue, function(err){
+        if (err) alert(err.reason);
+      });
+      break;
+    case "description":
+      Meteor.call("updateDescription", productId, newValue, function(err){
+        if (err) alert(err.reason);
+      });
+      break;
+    default:
+      alert("update wrong field")
+      break;
+  }
+}

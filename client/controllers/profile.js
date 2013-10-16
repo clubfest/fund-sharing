@@ -2,7 +2,8 @@
 Template.profile.purchases = function(){
   var user = Meteor.user();
   if (!user) return ;
-  var purchases = Purchases.find({userId: user._id}).fetch();
+  var purchases = Purchases.find({userId: user._id}, {sort: {createdAt: -1}}).fetch();
+  console.log(purchases)
   var products = Products.find().fetch();
   var totalRefund = 0;
   for (var i=0; i<products.length; i++){
@@ -14,18 +15,19 @@ Template.profile.purchases = function(){
         purchases[j].status = product.status;
         purchases[j].releaseDate = product.releaseDate;
 
+        // calculate available refund
         var donationsNeeded = product.fundNeeded - product.donations;
-        if (product.status == "conceiving" && product.fundRaised > 0) {
-          purchases[j].availableRefund = 0;
-        } else {
-          // var share = purchase.possibleRefund / product.fundNeeded;
-          // Math.floor(purchase.possibleRefund - donationsNeeded * share - purchase.claimedRefund);
-          var paidShare = purchase.paid / product.fundNeeded;
-          var deservedRefund = Math.floor(purchase.paid - donationsNeeded * paidShare - purchase.claimedRefund);
-          purchases[j].availableRefund = Math.min(deservedRefund, purchase.possibleRefund);
-          
-          totalRefund += purchases[j].availableRefund
-        }
+        // fundRaised is non-decreasing, when user obtains refund
+        var leftOver = product.fundRaised - donationsNeeded;
+        purchases[j].availableRefund = Math.max(Math.floor(leftOver * purchase.paid / product.fundRaised - purchase.claimedRefund), 0);
+        // if (product.status == "conceiving" && product.fundRaised > 0) {
+        //   purchases[j].availableRefund = 0;
+        // } else {
+        //   var paidShare = purchase.paid / product.fundRaised;
+        //   var deservedRefund = Math.floor(purchase.paid - donationsNeeded * paidShare - purchase.claimedRefund);
+        //   purchases[j].availableRefund = Math.min(deservedRefund, purchase.possibleRefund);
+        //   totalRefund += purchases[j].availableRefund
+        // }
       }
     }
   }
@@ -40,20 +42,11 @@ Template.profile.totalRefund = function(){
 
 Template.profile.projects = function(){
   var projects = Products.find({creatorId: Meteor.userId()});
-  if (projects.length > 0){
-    Session.set('hasProjects', true);
-  } else {
-    Session.set('hasProjects', false);
-  }
   return projects;
 }
 
-Template.profile.hasProjects = function(){
-  return true//Session.get('hasProjects')
-}
-
 Template.profile.money = function(){
-  return Meteor.user().fundSharing.money
+  return Meteor.user().money
 }
 
 Template.profile.events({
@@ -79,16 +72,14 @@ Template.profile.events({
       if (err) alert(err.reason);
     });
   },
-  'click #refund-btn': function(){
-    if (Session.get('totalRefund') < 1) {
-      alert('The current amount is too small to be refunded.');
-      return ;
-    }
-    var ans = confirm("Are you sure?");
+  'click .refund-btn': function(evt){
+    var purchaseId = evt.currentTarget.dataset.purchaseId;
+
+    var ans = confirm("Do you really want to be refunded?");
     if (!ans) return;
 
     // zero out all availableRefund and reduce out all possibleRefund
-    Meteor.call("refundAll", function(err){
+    Meteor.call("refund", purchaseId, function(err){
       if (err) alert(err.reason);
     });
   },
@@ -109,14 +100,6 @@ Template.profile.events({
     }
     Meteor.call('updateProduct', productId, {status: status});
   },
-  'click .comment-icon': function(evt){
-    var content = prompt("Email content:");
-    if (!content) return ;
-    var productId = evt.currentTarget.dataset.productId;
-    Meteor.call('sendToClients', productId, "Comment on your product at funding.a.meteor.com", content, function(err){
-      if (err) alert(err.reason);
-    });
-  }
 })
 
 

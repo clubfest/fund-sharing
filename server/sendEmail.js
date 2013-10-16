@@ -29,7 +29,7 @@ Meteor.methods({
     Email.send({
       from: from,
       to: to,
-      bcc: cc,
+      bcc: bcc,
       replyTo: replyTo,
       subject: subject,
       text: text
@@ -44,10 +44,26 @@ Meteor.methods({
     }
     this.unblock();
     Email.send({
-      from: nameDotted(product.name)+'@funding.a.meteor.com',
+      from: nameSpaced(product.name)+'@funding.a.meteor.com',
       to: creatorEmail,
       bcc: mailingList,
       replyTo: creatorEmail,
+      subject: subject,
+      text: content,
+    });
+  },
+  'sendToCreator': function(productId, subject, content){
+    var product = Products.findOne(productId);
+    var userEmail = Meteor.user().services.facebook.email;
+    var mailingList = [];
+    for (var i=0; i<product.orders.length; i++){
+      mailingList.push(product.orders[i].email);
+    }
+    this.unblock();
+    Email.send({
+      from: nameSpaced(product.name)+'@funding.a.meteor.com',
+      to: creatorEmail,
+      replyTo: userEmail,
       subject: subject,
       text: content,
     });

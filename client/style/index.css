@@ -38,3 +38,9 @@ body {
 a {
   cursor: pointer;
 }
+
+.inline-blocks div{
+  display: inline-block; 
+  padding: 15px;
+  vertical-align: top;
+}

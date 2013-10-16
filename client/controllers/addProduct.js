@@ -7,17 +7,20 @@ Template.addProduct.events({
       alert("Please sign in first");
       return ;
     }
-    var info = {
-      name: $("#new-name-input").val(),
-      initialPrice: parseFloat($("#new-price-input").val()),
-      fundNeeded: parseFloat($("#new-funding-input").val()),
-      daysNeeded: parseFloat($('#days-needed-input').val()),
+    var name = $("#new-name-input").val();
+    var fundNeeded = parseFloat($("#new-funding-input").val());
+    var daysNeeded = parseFloat($('#days-needed-input').val());
+    var initialPrice = parseFloat($("#new-price-input").val());
+
+    if (isNaN(initialPrice) || isNaN(fundNeeded) || isNaN(daysNeeded)){
+      throw new Meteor.Error(413, "Please input numbers"); 
     }
-    Meteor.call("addProduct", info, function(err){
+
+    Meteor.call("addProduct", name, fundNeeded, daysNeeded, initialPrice, function(err){
       if (err) {
         alert(err.reason);
       } else {
-        Meteor.Router.to("/purchase/"+info.name);
+        Meteor.Router.to("/purchase/"+name);
       }
     })
   }

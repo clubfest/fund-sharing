@@ -2,46 +2,45 @@
 <template name='donate'>
   {{#with product}}
     <h2>{{name}}</h2>
+
     <div data-category='description' class="editable" data-type="wysihtml5" data-placeholder="Enter text" data-emptytext="Enter the product description here" data-rows="4">
       {{{description}}}
     </div>
-
-   <!--  <div class='control-group'>
-      <label for='donation-input' class='control-label'>
-        Amount to donate
-      </label>
-      <div class='controls'>
-        $ <input id="donation-input" type='text' value="0" />      
+    <div class='align-right' style='font-size: 10px'>
+      <div>
+        <a class='comment-icon' data-product-id={{_id}}><i class='icon-envelope'></i> {{creatorName}}</a>
+      </div>
+      <div>
+        {{dateAbbrev createdAt}}
       </div>
     </div>
-
-    <button id="donation-submit" class='btn btn-primary'>
-      Donate
-    </button> -->
-
-    <!-- distinguish between ordering and purchasing -->
+      
     <h3>Ordering</h3>
+    <div class='inline-blocks'>
+      <div class='control-group'>
+        <label class='control-label'>Price</label>
+        <div class='controls'>
+          ${{fairPrice}}</span>
+        </div>
+      </div>
+      <div class='control-group'>
+        <label class='control-label'>Date of Release</label>
+        <div class='controls'>
+          {{dateAbbrev releaseDate}}
+        </div>
+      </div>
+      <div class='control-group'>
+        <label for='support-input' class='control-label'>
+          Additional Support      
+        </label>
+        <div class='controls'>
+          $ <input id="support-input" type='text' value="0" />      
+        </div>
+      </div>
+    </div>
+      
+    <!--
     <div class='control-group'>
-      <label class='control-label'>Date of Release</label>
-      <div class='controls'>
-        <span data-category='daysNeeded' class="editable" data-type="text" data-placeholder="Enter text" data-emptytext="Enter Initial Price in $">{{daysNeeded}}</span> Days
-      </div>
-    </div>
-    <div class='control-group'>
-      <label class='control-label'>Price</label>
-      <div class='controls'>
-        $<span data-category='initialPrice' class="editable" data-type="text" data-placeholder="Enter text" data-emptytext="Enter Initial Price in $">{{price}}</span>
-      </div>
-    </div>
-    <div class='control-group' style='display: none;'>
-      <label for='support-input' class='control-label'>
-        Additional Support      
-      </label>
-      <div class='controls'>
-        $ <input id="support-input" type='text' value="0" />      
-      </div>
-    </div>
-    <div class='control-group' style='display: none;'>
       <label for='email-input' class='control-label'>
         Email of receiver
       </label>
@@ -49,15 +48,17 @@
         <input id="email-input" type='text' value="{{email}}" />      
       </div>
     </div>
+    -->
     <div class='form-actions'>
       <button id="purchase-submit" class='btn btn-primary'>
+        <i class='icon-shopping-cart'></i>
         Submit order
       </button>
     </div>
 
     <h3>Donation progress</h3>
-    <p style='color: green'>Fund raising has been completed. If you want to donate, go to <a href='/profile'>your profile</a> after ordering.</p>
+    <p style='color: green'>To lower the price of this product, submit an order and donate in <a href="/profile">your profile</a>.</p>
     <div class='progressbar'></div>
-    <div>${{donations}} / $<span data-category='fundNeeded' class="editable control" data-type="text" data-placeholder="Enter text" data-emptytext="Enter Initial Price in $">{{fundNeeded}}</span></div>
+    <div>${{donations}} / ${{fundNeeded}}</div>
   {{/with}}
 </template>

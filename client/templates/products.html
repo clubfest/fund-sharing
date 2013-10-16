@@ -3,29 +3,28 @@
   <table class='product-table'>
     <thead>
       <td>Name</td>
-      <td>Status</td>
-      <td>Release Date</td>
+      <td>Release Status</td>
       <td class='align-right'>Price</td>
     </thead>
     {{#each products}}
       <tr>
         <td>
-          <a href="/purchase/{{name}}">
+          {{#isConceiving status}}<a href="/purchase/{{name}}">{{/isConceiving}}
+          {{#isBuilding status}}<a href="/donate/{{name}}">{{/isBuilding}}
+          {{#isShipping status}}<a href="/donate/{{name}}">{{/isShipping}}
+          {{#isGiving status}}<a href="/donate/{{name}}">{{/isGiving}}
             {{name}}
           </a>
         </td>
         
-        <td class='align-right'>
-          {{#isConceiving status}}<i class='icon-lightbulb'></i>{{/isConceiving}}
-          {{#isBuilding status}}<i class='icon-wrench'></i>{{/isBuilding}}
+        <td>
+          {{#isConceiving status}}T.B.A.{{/isConceiving}}
+          {{#isBuilding status}}{{dateAbbrev releaseDate}}{{/isBuilding}}
           {{#isShipping status}}<i class='icon-truck'></i>{{/isShipping}}
           {{#isGiving status}}<i class='icon-gift'></i>{{/isGiving}}
         </td>
-        <td>
-          {{dateAbbrev releaseDate}}
-        </td>
         <td class='align-right'>
-          ${{price}}
+          ${{fairPrice}}
         </td>
       </tr>
     {{/each}}

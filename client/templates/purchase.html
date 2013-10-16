@@ -8,34 +8,40 @@
       {{{description}}}
     </div>
 
-    <h3>Funding progress</h3>
-    <div class='progressbar'></div>
-    <div>${{fundRaised}} / $<span data-category='fundNeeded' class="editable control" data-type="text" data-placeholder="Enter text" data-emptytext="Enter Initial Price in $">{{fundNeeded}}</span></div>
-
+    <div class='align-right' style='font-size: 10px'>
+      <div>
+        <a class='comment-icon' data-product-id={{_id}}><i class='icon-envelope'></i> {{creatorName}}</a>
+      </div>
+      <div>
+        {{dateAbbrev createdAt}}
+      </div>
+    </div>   
 
     <h3>Ordering</h3>
-    <div class='control-group'>
-      <label class='control-label'>Time needed</label>
-      <div class='controls'>
-        <span data-category='daysNeeded' class="editable" data-type="text" data-placeholder="Enter text" data-emptytext="Enter Initial Price in $">{{daysNeeded}}</span> Days
+    <div class='inline-blocks'>
+      <div class='control-group'>
+        <label class='control-label'>Price</label>
+        <div class='controls'>
+          $<span data-category='initialPrice' class="editable" data-type="text" data-placeholder="Enter text" data-emptytext="Enter Initial Price in $">{{initialPrice}}</span>
+        </div>
+      </div>
+      <div class='control-group'>
+        <label class='control-label'>Time needed</label>
+        <div class='controls'>
+          <span data-category='daysNeeded' class="editable" data-type="text" data-placeholder="Enter text" data-emptytext="Enter Initial Price in $">{{daysNeeded}}</span> Days
+        </div>
+      </div>
+      <div class='control-group'>
+        <label for='support-input' class='control-label'>       
+          Additional Support       
+        </label>
+        <div class='controls'>
+          $ <input id="support-input" type='text' value="0" />      
+        </div>
       </div>
     </div>
-    <div class='control-group'>
-      <label class='control-label'>Price</label>
-      <div class='controls'>
-        $<span data-category='initialPrice' class="editable" data-type="text" data-placeholder="Enter text" data-emptytext="Enter Initial Price in $">{{price}}</span>
-      </div>
-    </div>
-
-    <div class='control-group'>
-      <label for='support-input' class='control-label'>       
-        Additional Support (this is refundable and not a donation)       
-      </label>
-      <div class='controls'>
-        $ <input id="support-input" type='text' value="0" />      
-      </div>
-    </div>
-    <div class='control-group'>
+      
+<!--     <div class='control-group'>
       <label for='email-input' class='control-label'>
         Email of receiver
       </label>
@@ -43,12 +49,17 @@
         <input id="email-input" type='text' value="{{email}}" />      
       </div>
     </div>
-
+ -->
     <div class='form-actions'>
       <button id="purchase-submit" class='btn btn-primary'>
+        <i class='icon-shopping-cart'></i>
         Submit order
       </button>
     </div>
+
+    <h3>Funding progress</h3>
+    <div class='progressbar'></div>
+    <div>${{fundRaised}} / $<span data-category='fundNeeded' class="editable control" data-type="text" data-placeholder="Enter text" data-emptytext="Enter Initial Price in $">{{fundNeeded}}</span></div>
       
   {{/with}}
 </template>

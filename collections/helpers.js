@@ -10,10 +10,13 @@ checkLogin = function(message){
 
 dateAbbrev = function(date){
   if (!date) return 'T.B.A.';
-  date = date.split(" ");
-  var ret = date[1] + ' ' + date[2] 
-  if ((new Date()).getFullYear() !== parseInt(date[3])){
-    ret += ', ' + date[3];
+  var current = new Date();
+  var year = date.getFullYear();
+  var month = date.getMonth()+1;
+  var day = date.getDate();
+  var ret = month+'/'+day;
+  if (year!==current.getFullYear()){
+    ret += '/'+year
   }
   return ret;
 }

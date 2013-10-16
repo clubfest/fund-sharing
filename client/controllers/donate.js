@@ -27,21 +27,28 @@ Template.donate.events({
       alert("support must be positive.");
       return ;
     }
-    var email = $('#email-input').val();
-    var comment = prompt("Comment or Request")
-    if (comment===null) return;
-    var options = {
-      name: Session.get("name"),
-      support: support,
-      email: email,
-      comment: comment,
-    };
-    Meteor.call("savePurchase", options, function(err){
+    // var email = $('#email-input').val();
+    var user = Meteor.user();
+    if (!user){
+      alert("Please sign in first");
+      return ;
+    }
+    var name = Session.get("name");
+    var email = user.services.facebook.email;
+    Meteor.call("savePledge", name, support, email, function(err){
       if (err) {
         alert(err.reason);
       } else {
         Meteor.Router.to('/profile');
       }
+    });
+  },
+  'click .comment-icon': function(evt){
+    var content = prompt("Email content:");
+    if (!content) return ;
+    var productId = evt.currentTarget.dataset.productId;
+    Meteor.call('sendToClients', productId, "Comment on your product at funding.a.meteor.com", content, function(err){
+      if (err) alert(err.reason);
     });
   }
 })

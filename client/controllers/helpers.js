@@ -6,7 +6,8 @@ Handlebars.registerHelper("isAdmin", function(){
 });
 
 Handlebars.registerHelper("email", function(){
-  return Meteor.user().services.facebook.email;
+  var user = Meteor.user();
+  if (user) return user.services.facebook.email;
 })
 
 ///// status
@@ -26,6 +27,7 @@ Handlebars.registerHelper('isGiving', function(status, options){
 ///// Product
 Handlebars.registerHelper('product', function(){
   var info = Products.findOne({name: Session.get("name")});
+  if (!info) return ;
   Session.set('donated', info.donations);
   Session.set('raised', info.fundRaised);
   Session.set('needed', info.fundNeeded);
@@ -35,6 +37,8 @@ Handlebars.registerHelper('product', function(){
   Session.set('status', info.status);
   return info;
 });
+
+
 
 //// Date
 Handlebars.registerHelper('dateAbbrev', function(date){

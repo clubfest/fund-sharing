@@ -1,92 +1,93 @@
 
 <template name='profile'>
-<h2>Order</h2>
-<table class='product-table'>
-  <thead>
-    <td>Name</td>
-    <td class='align-right'>Status</td>
-    <td>Release Date</td>
-    <td>Comment</td>
-    <td class='align-right'>Refund</td>
-    <td></td>
-    <td class='align-right'>Donate</td>
-  </thead>
-  {{#each purchases}}
-    <tr>
-      <td>
-        <a href="/purchase/{{name}}">
-          {{name}}
-        </a>
-      </td>
-      <td class='align-right'>
-        {{#isConceiving status}}<i class='icon-lightbulb'></i>{{/isConceiving}}
-        {{#isBuilding status}}<i class='icon-wrench'></i>{{/isBuilding}}
-        {{#isShipping status}}<i class='icon-truck'></i>{{/isShipping}}
-        {{#isGiving status}}<i class='icon-gift'></i>{{/isGiving}}
-      </td>
-      <td>{{dateAbbrev releaseDate}}</td>
-      <td><a class='comment-icon' data-product-id={{productId}}><i class='icon-envelope'></i></a></td>
-      <td class='align-right'>
-        ${{availableRefund}} / ${{possibleRefund}}
-      </td>
-      <td><a class='donate-icon' data-purchase-id='{{_id}}'><i class='icon-hand-right'></i></a></td>
-      <td class='align-right'>
-        ${{donations}}
-      </td>
-    </tr>
-  {{/each}}
-</table>
-<br/>
-
-<div class='control-group'>
-  <a id='refund-btn'>Get refund</a>:
-  <div class='controls'>
-    ${{totalRefund}}
-  </div>
-</div>
-
-<div class='control-group'>
-  Balances:
-  <div class='controls'>
-    ${{money}} 
-  </div>
-</div>
-
-{{#if hasProjects}}
-  <h2>Projects</h2>
+{{#if currentUser}}
+  <h2>Order</h2>
   <table class='product-table'>
     <thead>
       <td>Name</td>
-      <td class='align-right'>Status</td>
-      <td class='align-right'>Raised</td>
-      <td class='align-right'>Donated</td>
-      <td>Release Date</td>
-      <td>Notify</td>
+      <td>Release</td>
+      <td class='align-right'>Refund</td>
+      <td></td>
+      <td class='align-right'>Donate</td>
     </thead>
-    {{#each projects}}
+    {{#each purchases}}
       <tr>
         <td>
-          <a href="/purchase/{{name}}">
+          {{#isConceiving status}}<a href="/purchase/{{name}}">{{/isConceiving}}
+          {{#isBuilding status}}<a href="/donate/{{name}}">{{/isBuilding}}
+          {{#isShipping status}}<a href="/donate/{{name}}">{{/isShipping}}
+          {{#isGiving status}}<a href="/donate/{{name}}">{{/isGiving}}
             {{name}}
           </a>
         </td>
         <td class='align-right'>
-          {{#isConceiving status}}<i class='icon-lightbulb'></i>{{/isConceiving}}
-          {{#isBuilding status}}<button class='release-button' data-product-id='{{_id}}'>Release?</button>{{/isBuilding}}
+          {{#isConceiving status}}{{dateAbbrev releaseDate}}{{/isConceiving}}
+          {{#isBuilding status}}{{dateAbbrev releaseDate}}{{/isBuilding}}
           {{#isShipping status}}<i class='icon-truck'></i>{{/isShipping}}
           {{#isGiving status}}<i class='icon-gift'></i>{{/isGiving}}
         </td>
         <td class='align-right'>
-          ${{fundRaised}}
+          <a class='refund-btn' data-purchase-id='{{_id}}'>${{availableRefund}}</a> / ${{possibleRefund}}
         </td>
+        <td><a class='donate-icon' data-purchase-id='{{_id}}'><i class='icon-hand-right'></i></a></td>
         <td class='align-right'>
           ${{donations}}
         </td>
-        <td>{{dateAbbrev releaseDate}}</td>
-        <td><a class='notify-icon' data-product-id={{_id}}><i class='icon-envelope'></i></a></td>
       </tr>
     {{/each}}
   </table>
+  <br/>
+  <div class='inline-blocks'>
+    <div class='control-group'>
+      <label class='control-label'>Balance</label>
+      <div class='controls'>
+        ${{money}} 
+      </div>
+    </div>
+
+  </div>
+  
+
+  {{#if projects}}
+    <h2>Projects</h2>
+    <table class='product-table'>
+      <thead>
+        <td>Name</td>
+        <td class='align-right'>Status</td>
+        <td class='align-right'>Raised</td>
+        <td class='align-right'>Donated</td>
+        <td>Notify</td>
+      </thead>
+      {{#each projects}}
+        <tr>
+          <td>
+            {{#isConceiving status}}<a href="/purchase/{{name}}">{{/isConceiving}}
+            {{#isBuilding status}}<a href="/donate/{{name}}">{{/isBuilding}}
+            {{#isShipping status}}<a href="/donate/{{name}}">{{/isShipping}}
+            {{#isGiving status}}<a href="/donate/{{name}}">{{/isGiving}}
+              {{name}}
+            </a>
+          </td>
+          <td class='align-right'>
+            {{#isConceiving status}}<i class='icon-lightbulb'></i>{{/isConceiving}}
+            {{#isBuilding status}}<button class='release-button' data-product-id='{{_id}}'>Release?</button>{{/isBuilding}}
+            {{#isShipping status}}<i class='icon-truck'></i>{{/isShipping}}
+            {{#isGiving status}}<i class='icon-gift'></i>{{/isGiving}}
+          </td>
+          <td class='align-right'>
+            ${{currentFund}}
+          </td>
+          <td class='align-right'>
+            ${{donations}}
+          </td>
+          <td class='align-right'><a class='notify-icon' data-product-id={{_id}}><i class='icon-envelope'></i></a></td>
+        </tr>
+      {{/each}}
+    </table>
+  {{/if}}
+
+  <br/>
+
 {{/if}}
 
 </template>
