@@ -3,7 +3,6 @@ Template.profile.purchases = function(){
   var user = Meteor.user();
   if (!user) return ;
   var purchases = Purchases.find({userId: user._id}, {sort: {createdAt: -1}}).fetch();
-  console.log(purchases)
   var products = Products.find().fetch();
   var totalRefund = 0;
   for (var i=0; i<products.length; i++){
